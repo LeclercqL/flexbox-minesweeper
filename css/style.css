@@ -1,0 +1,116 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    font-size: 62.5%; /* redéclare le taille de la typo à 10px au lieu de 16px du coup 1rem = 10px => plus facile à calculer*/
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    border: 1rem inset rgb(204, 204, 204);
+    background-color: lightgray;
+}
+
+
+input[type="checkbox"] {
+    display: none;
+}
+
+.minesweeper {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 36.8rem;
+    height: 36.8rem;
+}
+
+.nb-1,
+.nb-2,
+.nb-3,
+.bomb,
+.box-hidden,
+.empty {
+    height: 4.6rem;
+    width: 4.6rem;
+    background-color: rgb(201, 201, 201);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 70% 70%;
+    border: 0.1rem dashed black;
+}
+
+.nb-1 {
+    background-image: url(../img/1.png);
+    background-color: rgb(205, 205, 240);
+}
+
+.nb-2 {
+    background-image: url(../img/2.png);
+    background-color: rgb(199, 245, 199);
+}
+
+.nb-3 {
+    background-image: url(../img/3.png);
+    background-color: rgb(243, 181, 181);
+}
+
+.bomb {
+    background-image: url(../img/bomb.png);
+}
+
+.box-hidden {
+    background-color: #8b8b8b;
+    background-image: url(../img/uncheckb.jpg);
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    position: relative;
+    z-index: 1;
+}
+
+.box-hidden+.box-hidden {
+    border-top: 1px solid black;
+}
+
+.box-hidden::before {
+    content: "";
+    background: white;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: calc(100% - 3px);
+    height: calc(100% - 3px);
+    z-index: -1;
+}
+
+.box-hidden::after {
+    content: "";
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    height: calc(100% - 6px); 
+    width: calc(100% - 6px);
+    background: #C9C9C9;
+    z-index: 2;
+}
+
+.box-hidden:hover {
+    background-color: rgb(201, 201, 201); /* On remet le même fond que sur les box par défaut  */
+    background-image: url(../img/bomb.png); /* On cache les pseudo éléments qui servent à styliser les box qui ne sont pas encore coché  */
+    cursor: pointer;
+}
+
+.box-hidden:hover::before,
+.box-hidden:hover::after {
+    display: none; /* On cache les pseudo éléments qui servent à styliser les box qui ne sont pas encore coché  */
+}
